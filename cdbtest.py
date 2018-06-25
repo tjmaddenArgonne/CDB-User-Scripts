@@ -80,15 +80,14 @@ def printLocations(itemid=None,level=0,maxlevel=100):
 
    
 dbLocations= [
-{'id':'56','name':'RF_Teststand', 'terms':['Test Stand']},
+{'id':'56','name':'RF_Teststand', 'terms':['Test Stand','RFTS']},
 {'id':'50','name':'High_Bay_Area#1', 'terms':['RF1','36',]},
 {'id':'51','name':'High_Bay_Area#2', 'terms':['RF2','37']},
 {'id':'52','name':'High_Bay_Area#3', 'terms':['RF3','38']},
 {'id':'53','name':'High_Bay_Area#4', 'terms':['RF4','40']},
-{'id':'54','name':'High_Bay_Area#5', 'terms':['RF5','Booster','Extraction','420 Spares']},
-{'id':'48','name':'A014', 'terms':['Source','A014','AO14']}
-
-
+{'id':'54','name':'High_Bay_Area#5', 'terms':['RF5','Booster','Extraction','420 Spares','Injection']},
+{'id':'48','name':'A014', 'terms':['Source','A014','AO14']},
+{'id':'257','name':'L3125', 'terms':['401','3125']}
 ]
 
 def ssLocToDbLoc(ssloc):
@@ -184,6 +183,45 @@ def addEdmInventory(edmid):
         return
 
 
+def addPdmInventory(edmid):
+    columns = ss.getCols(range(16))
+    for col in columns:
+      try:
+        edmitem= itemRestApi.addItem(
+            name=col[1],
+            domainName="Inventory",
+            derivedFromItemId=edmid, 
+            itemIdentifier1=col[3],
+            itemProjectName='APS-OPS')
+        print "Added %s"%col[1]
+
+        itemid= edmitem['id']
+        ssloc = col[11] + " " + col[12] + " " + col[13] 
+        dbloc = ssLocToDbLoc(ssloc)
+        ssslot =col[15] 
+        dbloc['ssloc'] = ssloc + ", slot " + ssslot
+        print "item id = %s, Location to be %s"%(itemid,dbloc)
+        if dbloc['id'] !=None:
+            itemRestApi.addItemRelationship(
+                itemid, 
+                dbloc['id'], 
+                'Location', 
+                relationshipDetails=dbloc['ssloc'])
+            print "Set Location %s"%col[2]
+
+        machine = col[10]
+        if "Spare" in machine:
+            itemRestApi.updateInventoryItemStatus(itemid,"Spare")
+        elif "Broken" in machine:
+            itemRestApi.updateInventoryItemStatus(itemid,"Failed/Rejected")
+        else:
+            itemRestApi.updateInventoryItemStatus(itemid,"Installed")
+        
+      except:
+        print "Problem with %s"%col[0]
+
+
+
 
 
 #checkInventory(2449,updateStatusByLocation)
@@ -192,7 +230,7 @@ def updateStatusByLocation(cat_id, inv_id, loc_id):
 #    print '%s %s %s'%(cat_id, inv_id, loc_id)
     stat_val = "Installed" 
     if type(loc_id)==str: loc_id = int(loc_id)
-    if loc_id == 56: #test stand
+    if loc_id == 56 or loc_id == 257: #test stand or 401
         stat_val ="Spare"
     itemRestApi.updateInventoryItemStatus(inv_id,stat_val)
     print "Updated status %s"%stat_val
@@ -390,6 +428,19 @@ edmInventory(itemid)
 checkInventory(itemid)
 checkInventory(2449,updateStatusByLocation)
 
+ss.readTabText('PDM_Inventory.csv')
+
+
+pdm = itemRestApi.addItem(
+    domainName='Catalog', 
+    name='Phase Detector Module',
+    itemProjectName="APS-OPS",
+    itemIdentifier1='PDM100')
+
+
+addPdmInventory(pdm['id'])
+
+checkInventory(pdm['id'])
 
 """
 

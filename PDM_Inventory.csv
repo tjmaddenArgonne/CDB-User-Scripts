@@ -1,0 +1,25 @@
+,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
+%HDR,,,,,,,,,,,,,,,,
+Module Type,Serial Number,Motherboard PCB,Motherboard PCB SN,Ch0 REF Level Amp SN,Ch0 SIG Level Amp SN,Ch0 Phase Det SN,Ch1 REF Level Amp SN,Ch1 SIG Level Amp SN,Ch1 Phase Det SN,Machine,Bldg,Room,Rack,VXI Crate,VXI Slot #,Modifications
+PDM100,Unit1,,15,,,,,,,Storage Ring,420,,S40 Rack 6,,6,
+PDM100,Unit2,,14,,,,,,,Storage Ring,420,,S40 Rack 6,,7,
+PDM100,603,,7,,,,,,,Storage Ring,420,,RF4 Rack 1,,4,
+PDM100,609,,18,,,,,,,Storage Ring,420,,S38 Rack 6,,6,
+PDM100,608,,17,,,,,,,Storage Ring,420,,S38 Rack 6,,7,
+PDM100,Unit3,93PC149D,8,,,,,,,Broken,,,,,,
+PDM100,612,,13,,,,,,,Booster,420,,RF5 Rack 6,,4,
+PDM100,606,,9,,,,,,,Storage Ring,420,,RF3 Rack 1,,4,
+PDM100,604,,16,,,,,,,Storage Ring,420,,S37 Rack 6,,6,
+PDM100,Unit4,,3,,,,,,,Storage Ring,420,,S37 Rack 6,,7,
+PDM100,610,,12,,,,,,,Storage Ring,420,,RF2 Rack 1,,4,
+PDM100,605,93PC149D,2,31,30,12,33,32,13,Booster,420, ,RF5 Rack 1,44,4,
+PDM100,601,93PC149D,10,19,18,10,21,20,11,Storage Ring,420,,RF1 Rack 1,,4,Ch 3&4 Swap. U15-6. -11 20kOhm jumper
+PDM100,600,93PC149E,20,11,9,1,37,39,2,Booster,420,,RF5 Rack 11,,4,
+PDM100,Unit5,,5,,,,,,,RFTS,420,,RFTS Rack 7,,3,
+PDM100,613,93PC149E,11,41,42,15,43,44,16,Broken,401,,L3125,,4,Removed from service for fail LED
+PDM100,607,93PC149E,19,13,12,6,15,14,7,Storage Ring,420,,S36 Rack 6,,7,Ch 3&4 Swap. 
+PDM100,620,93PC149D,6,6,7,4,8,10,5,Spare,401,,L3125,,,Ch 3&4 Swap. 
+PDM100,621,93PC149D,4,23,22,8,28,26,9,Spare,420,,S36 Rack 6,,6,Ch 3&4 Swap. U15-6. -11 20kOhm jumper
+PDM100,602,93PC149E,21,34,29,3,40,38,14,Spare,420,,,,,Rebuilt 10/2014
+PDM100,Unit6,,1,,,,,,,Source,420,A014,Rack 9,,3,
